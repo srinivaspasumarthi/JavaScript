@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Subject Selection</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="save.js"></script>
+    <script>
+        $(document).ready(function () {
+            var passed=3;
+            var x=function(){
+             var y=2;
+             return passed+2;
+            };
+            console.log(passed);
+            console.log(x);
+            console.dir(x);
+         /*  let obj= function(){
+                let i=0;
+                return{
+                   setI(k){
+                       i=k;
+                   },
+                   getI(){
+                       return i;
+                   }
+                }
+            } 
+
+
+            console.log(obj);
+            let e=obj();
+            e.setI(2);
+            console.log(e.getI());
+            console.log(e);
+            e.setI(4);
+            console.log(e.getI());
+            console.log(e); */
+            $(".subject,.days").click(function () {
+                var days = $(".days");
+                var subject = $(".subject");
+                console.log(days);
+                var subject_ar = [];
+                var days_ar = [];
+
+                subject.each(function (key, value) {
+                    console.log($(this));
+                    if ($(this).is(":checked")) {
+                        subject_ar.push($(this).val());
+                    }
+                });
+
+                localStorage.setItem("subject_ar", subject_ar);
+
+                days.each(function (key, value) {
+                    // console.log(this);
+                    if ($(this).is(":checked")) {
+                        days_ar.push($(this).val());
+                    }
+                });
+
+                localStorage.setItem("days_ar", days_ar);
+
+                if (subject_ar.length == 2 && days_ar.length == 3) {
+                    $("#Save").css({ display: 'block' });
+                    //$("#Save").css( "display", "block" });
+                } else {
+                    $("#Save").css({ display: 'none' });
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container jumbotron">
+        <div>
+            <div>
+                First Name:<input type="text" class="form-control" placeholder="Enter Name of the student" id="StudentName">
+                <!--  <div class="invalid-feedback">
+                Please enter person name.
+              </div>-->
+            </div>
+            <div>
+                Surname:<input type="text" class="form-control" placeholder="Enter Surname of the student" id="SurName">
+            </div>
+            <h1>Select 2 Subjects</h1>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <input type="checkbox" class="subject any" value="Graph Theory"> Graph Theory
+                </div>
+                <div class="col-6 ">
+                    <input type="checkbox" class="subject any" value="Mathematics"> Mathematics
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <input type="checkbox" class="subject any" value="Compiler Design"> Compiler Design
+                </div>
+                <div class="col-6 ">
+                    <input type="checkbox" class="subject any" value="Data Structures"> Data Structures
+                </div>
+            </div>
+            <div class="row mt-5">
+                <p>
+                    <b>CGPA Level</b>
+                    <select id="myList">
+                        <!--  <option value = "9+">9+</option>
+                  <option value = "8+">8+</option>
+                  <option value = "7+">7+</option>
+                  <option value = "5+">5+</option> -->
+                        <option disabled selected value="0">--choose a value--</option>
+                        <option value="A+">A+</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </p>
+            </div>
+            <div class="row mt-3">
+                <h1>Select 3 days to attend class</h1>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <input type="checkbox" class="days any" value="Monday"> Monday
+                </div>
+                <div class="col-6 ">
+                    <input type="checkbox" class="days any" value="Tuesday"> Tuesday
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <input type="checkbox" class="days any" value="Wednesday"> Wednesday
+                </div>
+                <div class="col-6 ">
+                    <input type="checkbox" class="days any" value="Thursday"> Thursday
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <input type="checkbox" class="days" value="Friday"> Friday
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6 ">
+                    <button type="submit" id="Save" class="btn btn-primary" onclick="return save()" style="display:none;">
+                        Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
